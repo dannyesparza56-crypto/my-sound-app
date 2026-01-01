@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My First PWA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    body { 
+      background: #121212; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      height: 100vh; 
+      margin: 0; 
+      font-family: sans-serif;
+    }
+    #action-btn {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 8px solid #00ff88;
+      background: none;
+      color: #00ff88;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+      transition: 0.2s;
+    }
+    #action-btn:active {
+      transform: scale(0.9);
+      background: #00ff88;
+      color: #121212;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="action-btn">CLICK ME</button>
+  
+  <audio id="click-sound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+
+  <script>
+    const btn = document.getElementById('action-btn');
+    const sound = document.getElementById('click-sound');
+
+    btn.addEventListener('click', () => {
+      sound.currentTime = 0; // Reset sound to start
+      sound.play();
+    });
+
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js');
+    }
+  </script>
+</body>
+</html>
